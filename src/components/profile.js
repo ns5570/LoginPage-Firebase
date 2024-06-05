@@ -9,6 +9,7 @@ import image2 from "./image2.png"; // Assuming you have image 2
 
 function Profile() {
   const [userDetails, setUserDetails] = useState(null);
+  const [error, setError] = useState("");
 
   const fetchUserData = async () => {
     auth.onAuthStateChanged(async (user) => {
@@ -37,6 +38,7 @@ function Profile() {
       console.log("User logged out successfully!");
     } catch (error) {
       console.error("Error logging out:", error.message);
+      setError("Failed to log out. Please try again.");
     }
   }
 
@@ -71,6 +73,7 @@ function Profile() {
         <button className="btn btn-primary logout-button" onClick={handleLogout}>
           Logout
         </button>
+        {error && <p className="error-message">{error}</p>}
       </div>
       <div className="main-content">
         <div className="feed">
@@ -93,7 +96,6 @@ function Profile() {
               </button>
             </div>
           </div>
-
           
           <div className="feed-post">
             <h3>Post Title 2</h3>
